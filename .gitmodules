@@ -7,6 +7,3 @@ url=https://github.com/MrHelmut/NVorbis.git
 [submodule "ThirdParty/SDL_GameControllerDB"]
 	path = ThirdParty/SDL_GameControllerDB
 	url = https://github.com/gabomdq/SDL_GameControllerDB.git
-[submodule "MonoGame.Framework"]
-	path = MonoGame.Framework
-	url = https://github.com/wihu/MonoGame.Framework.git
