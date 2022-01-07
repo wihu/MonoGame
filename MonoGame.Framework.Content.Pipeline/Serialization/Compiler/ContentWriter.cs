@@ -49,13 +49,13 @@ namespace Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler
             'X', // MacOSX
             'W', // WindowsStoreApp
             'n', // NativeClient
-            'p', // PlayStationMobile
             'M', // WindowsPhone8
             'r', // RaspberryPi
             'P', // PlayStation4
-            'v', // PSVita
             'O', // XboxOne
             'S', // Nintendo Switch
+            'G', // Google Stadia
+            'b', // WebAssembly and Bridge.NET
         };
 
         /// <summary>

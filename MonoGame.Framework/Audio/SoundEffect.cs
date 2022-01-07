@@ -164,9 +164,6 @@ namespace Microsoft.Xna.Framework.Audio
                 throw new ArgumentException("Ensure that the buffer length is non-zero.", "buffer");
 
             var blockAlign = (int)channels * 2;
-            if ((buffer.Length % blockAlign) != 0)
-                throw new ArgumentException("Ensure that the buffer meets the block alignment requirements for the number of channels.", "buffer");
-
             if (count <= 0)
                 throw new ArgumentException("Ensure that the count is greater than zero.", "count");
             if ((count % blockAlign) != 0)
@@ -177,7 +174,7 @@ namespace Microsoft.Xna.Framework.Audio
             if (((ulong)count + (ulong)offset) > (ulong)buffer.Length)
                 throw new ArgumentException("Ensure that the offset+count region lines within the buffer.", "offset");
 
-            var totalSamples = buffer.Length / blockAlign;
+            var totalSamples = count / blockAlign;
 
             if (loopStart < 0)
                 throw new ArgumentException("The loopStart cannot be negative.", "loopStart");
@@ -228,6 +225,33 @@ namespace Microsoft.Xna.Framework.Audio
             inst._effect = this;
 
             return inst;
+        }
+
+        /// <summary>
+        /// Creates a new SoundEffect object based on the specified data stream.
+        /// This internally calls <see cref="FromStream"/>.
+        /// </summary>
+        /// <param name="path">The path to the audio file.</param>
+        /// <returns>The <see cref="SoundEffect"/> loaded from the given file.</returns>
+        /// <remarks>The stream must point to the head of a valid wave file in the RIFF bitstream format.  The formats supported are:
+        /// <list type="bullet">
+        /// <item>
+        /// <description>8-bit unsigned PCM</description>
+        /// <description>16-bit signed PCM</description>
+        /// <description>24-bit signed PCM</description>
+        /// <description>32-bit IEEE float PCM</description>
+        /// <description>MS-ADPCM 4-bit compressed</description>
+        /// <description>IMA/ADPCM (IMA4) 4-bit compressed</description>
+        /// </item>
+        /// </list>
+        /// </remarks>
+        public static SoundEffect FromFile(string path)
+        {
+            if (path == null)
+                throw new ArgumentNullException("path");
+
+            using (var stream = File.OpenRead(path))
+                return FromStream(stream);
         }
 
         /// <summary>
@@ -430,7 +454,7 @@ namespace Microsoft.Xna.Framework.Audio
             set
             {
                 if (value <= 0f)
-                    throw new ArgumentOutOfRangeException ("value of DistanceScale");
+                    throw new ArgumentOutOfRangeException ("value", "value of DistanceScale");
 
                 _distanceScale = value;
             }
@@ -454,7 +478,7 @@ namespace Microsoft.Xna.Framework.Audio
                 //   although the documentation does not say it throws an error we will anyway
                 //   just so it is like the DistanceScale
                 if (value < 0.0f)
-                    throw new ArgumentOutOfRangeException ("value of DopplerScale");
+                    throw new ArgumentOutOfRangeException ("value", "value of DopplerScale");
 
                 _dopplerScale = value;
             }
