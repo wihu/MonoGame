@@ -314,7 +314,7 @@ namespace Microsoft.Xna.Framework.Graphics
                 if (color != _lastClearColor)
                 {
                     GL.ClearColor(color.X, color.Y, color.Z, color.W);
-                    GraphicsExtensions.CheckGLError();
+                    //GraphicsExtensions.CheckGLError();
                     _lastClearColor = color;
                 }
                 bufferMask = bufferMask | ClearBufferMask.ColorBufferBit;
@@ -324,7 +324,7 @@ namespace Microsoft.Xna.Framework.Graphics
                 if (stencil != _lastClearStencil)
                 {
 				    GL.ClearStencil(stencil);
-                    GraphicsExtensions.CheckGLError();
+                    //GraphicsExtensions.CheckGLError();
                     _lastClearStencil = stencil;
                 }
                 bufferMask = bufferMask | ClearBufferMask.StencilBufferBit;
@@ -339,7 +339,7 @@ namespace Microsoft.Xna.Framework.Graphics
  #else
                     GL.ClearDepth(depth);
  #endif
-                    GraphicsExtensions.CheckGLError();
+                    //GraphicsExtensions.CheckGLError();
                     _lastClearDepth = depth;
                 }
 				bufferMask = bufferMask | ClearBufferMask.DepthBufferBit;
@@ -347,7 +347,7 @@ namespace Microsoft.Xna.Framework.Graphics
 
 
 			GL.Clear(bufferMask);
-            GraphicsExtensions.CheckGLError();
+            //GraphicsExtensions.CheckGLError();
            		
             // Restore the previous render state.
 		    ScissorRectangle = prevScissorRect;
